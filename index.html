@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <audio controls id="music">
+        <source src="https://hua.flytodream.cn/musicApi/getUrl/108242.aac" />
+    </audio>
+
+    <button id="button" click="play">播放</button>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
+<script>
+    const a = 'https://upos-sz-mirrorhw.bilivideo.com/ugaxcode/m210614a285tdyelnfeq71ycovbri2cl-192k.m4a?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1670388878&gen=playurlv2&os=hwbv&oi=3416788321&trid=85f39e0087ac4465bf6c66683ba7b054B&mid=0&platform=pc&upsig=0a51e77260ea85cab115e53ee93a958a&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&bvc=vod&nettype=0&orderid=0,1&logo=00000000'
+    let sound = null
+    let createdBlobRecords = []
+    function fetch() {
+        return new Promise((resolve, reject) => {
+            axios.get('http://localhost:3003/get', {
+                params: {
+                    songName: '晴天',
+                    artistsName: '周杰伦',
+                    id: 111111111111
+                }
+            })
+                .then(function (response) {
+                    const music = document.getElementById('music');
+                    const source = document.createElement('source');
+
+                    const buffer = decode(response.data.data.url)
+                    const url = getAudioSourceBlobURL(buffer)
+
+                    source.src = response.data.data.url
+                    music.appendChild(source);
+
+                    resolve(response.data.data.url)
+                    // const a = document.createElement('a');
+                    // a.download = "m.aac"
+                    // a.href = url
+                    // document.body.appendChild(a);
+                    // a.click()
+                })
+        })
+    }
+    document.getElementById('button').onclick = async () => {
+        const url = await fetch()
+        // var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function () {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         console.log(this);
+        //     }
+        // };
+        // xhttp.open("GET", a, true);
+        // xhttp.send();
+        // console.log(url)
+        // sound = new Howl({
+        //     src: [url],
+        //     html5: true,
+        //     format: ['mp3', 'flac'],
+        //     autoplay: true,
+        //     onend: () => {
+        //         console.log('end')
+        //     },
+        //     onload: () => {
+        //         console.log('load')
+        //     }
+        // });
+        // console.log('play', sound)
+        // sound.play('laser');
+        // Howler.volume(0.5);
+    }
+
+    function getAudioSourceBlobURL(data) {
+        // Create a new object URL.
+        const source = URL.createObjectURL(new Blob([data]));
+        return source;
+    }
+    const lookup = typeof Uint8Array === 'undefined' ? [] : new Uint8Array(256);
+    function decode(base64) {
+        let bufferLength = base64.length * 0.75,
+            len = base64.length,
+            i,
+            p = 0,
+            encoded1,
+            encoded2,
+            encoded3,
+            encoded4;
+
+        if (base64[base64.length - 1] === '=') {
+            bufferLength--;
+            if (base64[base64.length - 2] === '=') {
+                bufferLength--;
+            }
+        }
+
+        const arraybuffer = new ArrayBuffer(bufferLength),
+            bytes = new Uint8Array(arraybuffer);
+
+        for (i = 0; i < len; i += 4) {
+            encoded1 = lookup[base64.charCodeAt(i)];
+            encoded2 = lookup[base64.charCodeAt(i + 1)];
+            encoded3 = lookup[base64.charCodeAt(i + 2)];
+            encoded4 = lookup[base64.charCodeAt(i + 3)];
+
+            bytes[p++] = (encoded1 << 2) | (encoded2 >> 4);
+            bytes[p++] = ((encoded2 & 15) << 4) | (encoded3 >> 2);
+            bytes[p++] = ((encoded3 & 3) << 6) | (encoded4 & 63);
+        }
+
+        return arraybuffer;
+    };
+</script>
+
+</html>
