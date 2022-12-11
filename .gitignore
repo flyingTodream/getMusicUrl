@@ -6,6 +6,7 @@
 *.sln
 *.zip
 *.rar
+/.vercel
 package-lock.json
 pnpm-lock.yaml
 apps/testapp
@@ -31,3 +32,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+.vercel

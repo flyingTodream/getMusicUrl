@@ -3,7 +3,7 @@ const express = require('express')
 const { getPlayUrl } = require('./getUrl')
 const fs = require('fs')
 const app = express()
-const port = 8080
+const port = 3003
 
 app.all("*", function (req, res, next) {
     // 设置允许跨域的域名,*代表允许任意域名跨域
