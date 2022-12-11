@@ -1,6 +1,6 @@
 {
-  "script":{
-    "build": ""
+  "scripts":{
+    "build": "yarn"
   },
   "dependencies": {
     "@unblockneteasemusic/rust-napi": "^0.3.0",
