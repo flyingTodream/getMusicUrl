@@ -30,14 +30,12 @@ app.get('/', async (req, res) => {
             const { data } = await requ(`${apiUrl}/song/url/v1?level=exhigh&id=` + id)
             if (data[0].freeTrialInfo) {
                 // 试听
-                console.log('1')
                 url = await getU(id, apiUrl)
                 res.send({
                     code: 200,
                     url
                 })
             } else {
-                console.log('2')
                 url = data[0].url
                 res.send({
                     code: 200,
@@ -45,7 +43,6 @@ app.get('/', async (req, res) => {
                 })
             }
         } else {
-            console.log('3')
             url = await getU(id, apiUrl)
             res.send({
                 code: 200,
@@ -62,13 +59,13 @@ app.get('/', async (req, res) => {
 
 app.get('/get', async (req, res) => {
     const { songName, artistsName, id } = req.query
-    fs.exists(`./file/${id}.mp3`, async (exists) => {
+    fs.exists(`./file/${id}.aac`, async (exists) => {
         if (exists) {
             res.send({
                 status: 200,
                 data: {
                     source: '',
-                    url: `https://hua.flytodream.cn/musicApi/getUrl/${id}.mp3`
+                    url: `https://hua.flytodream.cn/musicApi/getUrl/${id}.aac`
                 }
             })
         } else {

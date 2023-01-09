@@ -11,7 +11,7 @@ const ctx = {
     config: {
         'joox:cookie': null,
         'qq:cookie': null,
-        'ytdl:exe': null,
+        'ytdl:exe': "youtube-dl",
     },
 }
 function toBuffer(data) {
@@ -39,7 +39,7 @@ async function getBiliVideoFile(url) {
 }
 async function getPlayUrl(songName, artistsName, id) {
     const searchResult = await executor.search(
-        ['ytdl', 'kugou', 'bilibili', 'pyncm', 'migu', 'kuwo',],
+        ['ytdl', 'kugou', 'bilibili', 'pyncm', 'kuwo'],
         {
             id: String(id),
             name: songName,

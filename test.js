@@ -3,7 +3,7 @@ const fs = require('fs')
 
 async function exe() {
     // console.log(mp3ToAac)
-    const d = await getPlayUrl('天后', '陈势安', 72394)
+    const d = await getPlayUrl('晴天', '周杰伦')
 
     console.log(d)
 }
