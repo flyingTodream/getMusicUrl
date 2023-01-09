@@ -3,14 +3,9 @@ const fs = require('fs')
 
 async function exe() {
     // console.log(mp3ToAac)
-    const d = await getPlayUrl('晴天', '周杰伦', 1111111)
-    // const buffer = _decodeBase64(d.url)
-    // await fs.writeFileSync('./acc/1111111.aac', buffer)
-    // // mp3ToAac("./acc/1475091192.aac", "./acc/output.mp3")
-    // await execu('./ffmpeg -i ./acc/1111111.aac -acodec libmp3lame ./acc/1111111.mp3')
-    // await execu('rm ./acc/1111111.mp3')
+    const d = await getPlayUrl('天后', '陈势安', 72394)
 
-    console.log('0000000')
+    console.log(d)
 }
 
 

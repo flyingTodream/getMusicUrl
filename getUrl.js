@@ -56,12 +56,12 @@ async function getPlayUrl(songName, artistsName, id) {
     if (retrievedSong.url.includes('bilivideo.com')) {
         retrievedSong.url = await getBiliVideoFile(retrievedSong.url);
     }
-
     if (retrievedSong.source === 'bilibili') {
-        const path = `./acc/${id}.aac`
+        const path = `./file/${id}.aac`
+        const outputPath = `./file/${id}.mp3`
         const buffer = _decodeBase64(retrievedSong.url)
         await fs.writeFileSync(path, buffer)
-        await execu(`./ffmpeg -i ${path} -acodec libmp3lame ./acc/${id}.mp3`)
+        await execu(`./ffmpeg -i ${path} -acodec libmp3lame ${outputPath}`)
         await execu(`rm ${path}`)
         retrievedSong.url = `https://hua.flytodream.cn/musicApi/getUrl/${id}.mp3`
     }
@@ -89,5 +89,6 @@ async function execu(exe) {
 
 module.exports = {
     getPlayUrl,
-    execu
+    execu,
+    _decodeBase64
 }

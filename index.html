@@ -11,7 +11,7 @@
 <body>
 
     <audio controls id="music">
-        <source src="https://hua.flytodream.cn/musicApi/getUrl/108242.aac" />
+        <!-- <source src="https://static.flytodream.cn/2.aac" /> -->
     </audio>
 
     <button id="button" click="play">播放</button>
@@ -28,7 +28,7 @@
                 params: {
                     songName: '晴天',
                     artistsName: '周杰伦',
-                    id: 111111111111
+                    id: 4
                 }
             })
                 .then(function (response) {
@@ -38,7 +38,8 @@
                     const buffer = decode(response.data.data.url)
                     const url = getAudioSourceBlobURL(buffer)
 
-                    source.src = response.data.data.url
+                    // source.src = response.data.data.url
+                    source.src = "https://static.flytodream.cn/4.mp3"
                     music.appendChild(source);
 
                     resolve(response.data.data.url)
