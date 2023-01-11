@@ -39,7 +39,7 @@ async function getBiliVideoFile(url) {
 }
 async function getPlayUrl(songName, artistsName, id) {
     const searchResult = await executor.search(
-        ['ytdl', 'kugou', 'bilibili', 'pyncm', 'kuwo'],
+        ['kugou', 'bilibili', 'pyncm', 'kuwo'],
         {
             id: String(id),
             name: songName,
@@ -56,6 +56,7 @@ async function getPlayUrl(songName, artistsName, id) {
     if (retrievedSong.url.includes('bilivideo.com')) {
         retrievedSong.url = await getBiliVideoFile(retrievedSong.url);
     }
+    console.log(retrievedSong)
     if (retrievedSong.source === 'bilibili') {
         const path = `./file/${id}.aac`
         const outputPath = `./file/${id}.mp3`
