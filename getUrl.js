@@ -59,12 +59,12 @@ async function getPlayUrl(songName, artistsName, id) {
     console.log(retrievedSong)
     if (retrievedSong.source === 'bilibili') {
         const path = `./file/${id}.aac`
-        const outputPath = `./file/${id}.mp3`
+        // const outputPath = `./file/${id}.mp3`
         const buffer = _decodeBase64(retrievedSong.url)
         await fs.writeFileSync(path, buffer)
-        await execu(`./ffmpeg -i ${path} -acodec libmp3lame ${outputPath}`)
-        await execu(`rm ${path}`)
-        retrievedSong.url = `https://hua.flytodream.cn/musicApi/getUrl/${id}.mp3`
+        // await execu(`./ffmpeg -i ${path} -acodec libmp3lame ${outputPath}`)
+        // await execu(`rm ${path}`)
+        retrievedSong.url = `https://hua.flytodream.cn/musicApi/getUrl/${id}.aac`
     }
 
     return retrievedSong

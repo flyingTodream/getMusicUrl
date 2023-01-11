@@ -17,9 +17,9 @@ function requ(url) {
 }
 function getU(id, apiurl) {
     return new Promise((resolve, reject) => {
-        fs.exists(`./file/${id}.mp3`, async (exists) => {
+        fs.exists(`./file/${id}.aac`, async (exists) => {
             if (exists) {
-                resolve(`https://hua.flytodream.cn/musicApi/getUrl/${id}.mp3`)
+                resolve(`https://hua.flytodream.cn/musicApi/getUrl/${id}.aac`)
             } else {
                 try {
                     const d = await requ(`${apiurl}/song/detail?ids=` + id)
