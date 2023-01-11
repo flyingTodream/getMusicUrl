@@ -4,7 +4,7 @@ const { getPlayUrl, _decodeBase64 } = require('./getUrl')
 const fs = require('fs')
 const { requ, getU } = require('./request')
 const app = express()
-const port = 3003
+const port = 3000
 const apiUrl = "localhost:3003"
 app.all("*", function (req, res, next) {
     // 设置允许跨域的域名,*代表允许任意域名跨域
