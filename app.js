@@ -30,37 +30,37 @@ app.get('/', async (req, res) => {
                 // 试听
                 url = await getU(id, apiUrl)
                 res.send({
-                    data: {
+                    data: [{
                         code: 200,
                         url
-                    }
+                    }]
                 })
             } else {
                 url = data[0].url
                 res.send({
-                    data: {
+                    data: [{
                         code: 200,
                         url
-                    }
+                    }]
                 })
             }
         } else {
             url = await getU(id, apiUrl)
             res.send({
-                data: {
+                data: [{
                     code: 200,
                     url
-                }
+                }]
             })
         }
     } catch (error) {
         res.send({
             code: 500,
             msg: '',
-            data: {
+            data: [{
                 code: 500,
                 msg: ''
-            }
+            }]
         })
     }
 })
