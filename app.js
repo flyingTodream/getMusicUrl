@@ -5,7 +5,7 @@ const fs = require('fs')
 const { requ, getU } = require('./request')
 const app = express()
 const port = 3003
-const apiUrl = "localhost:3003"
+const apiUrl = "localhost:3000"
 app.all("*", function (req, res, next) {
     // 设置允许跨域的域名,*代表允许任意域名跨域
     res.header('Access-Control-Allow-Origin', '*');
@@ -21,11 +21,11 @@ app.all("*", function (req, res, next) {
 app.use(express.static('file'));
 app.get('/', async (req, res) => {
     try {
+
         const { id } = req.query
         let url = ""
         await getU(id, apiUrl)
         const { success } = await requ(`${apiUrl}/check/music?id=` + id)
-
         if (success) {
             const { data } = await requ(`${apiUrl}/song/url/v1?level=exhigh&id=` + id)
             if (data[0].freeTrialInfo) {

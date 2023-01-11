@@ -56,7 +56,6 @@ async function getPlayUrl(songName, artistsName, id) {
     if (retrievedSong.url.includes('bilivideo.com')) {
         retrievedSong.url = await getBiliVideoFile(retrievedSong.url);
     }
-    console.log(retrievedSong)
     if (retrievedSong.source === 'bilibili') {
         const path = `./file/${id}.aac`
         // const outputPath = `./file/${id}.mp3`
